@@ -10,6 +10,7 @@ package com.acceleron.spendly.exchange.controllers;
 
 import com.acceleron.spendly.exchange.api.services.ExchangeService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,9 +23,9 @@ import static com.acceleron.spendly.exchange.controllers.ExchangeController.CONT
 @RequestMapping(CONTROLLER_PATH)
 @RequiredArgsConstructor
 public class ExchangeController {
-    public static final String CONTROLLER_PATH = "/exchange";
+    public static final String CONTROLLER_PATH = "exchange";
 
-    private final ExchangeService exchangeService;
+    private final ExchangeService yahooFinanceServiceImpl;
 
     @GetMapping
     public CurrencyExchangeDTO getCurrencyExchange(
@@ -32,6 +33,6 @@ public class ExchangeController {
             @RequestParam String to,
             @RequestParam(required = false, defaultValue = "1.00") String amount
     ) {
-        return exchangeService.exchange(from, to, amount);
+        return yahooFinanceServiceImpl.exchange(from, to, amount);
     }
 }

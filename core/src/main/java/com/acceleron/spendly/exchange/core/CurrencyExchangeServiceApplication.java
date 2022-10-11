@@ -11,6 +11,9 @@ package com.acceleron.spendly.exchange.core;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.web.client.RestTemplate;
+
+import java.net.MalformedURLException;
 
 @ComponentScan("com.acceleron.spendly")
 @SpringBootApplication
@@ -18,5 +21,8 @@ public class CurrencyExchangeServiceApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(CurrencyExchangeServiceApplication.class);
+
+        RestTemplate restTemplate = new RestTemplate();
+        System.out.println(restTemplate.getForEntity("https://query1.finance.yahoo.com/v7/finance/quote?symbols=USDUAH%3DX", String.class).getBody());
     }
 }
